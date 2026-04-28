@@ -10,7 +10,7 @@ class BaseModel(Model):
 class Campus(BaseModel):
     id = PrimaryKeyField()
     name = CharField(max_length=50, unique=True, null=False)
-    floors = IntegerField(null=False)
+    floors = IntegerField(null=False, constraints=[Check('floors > 0')])
     is_active = BooleanField(default=True, null=False)
 
     class Meta:
