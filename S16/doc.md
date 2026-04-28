@@ -153,10 +153,6 @@
 | id | integer |
 | title | string |
 
----
-
-### ER-диаграмма
-
 ```markdown
 ### ER-диаграмма
 
