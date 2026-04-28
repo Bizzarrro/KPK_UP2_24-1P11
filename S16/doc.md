@@ -73,6 +73,8 @@
 | Параметр | Тип | Описание |
 |----------|-----|----------|
 | min_floors | integer | Фильтр по минимальному количеству этажей |
+| max_floors | integer | Фильтр по максимальному количеству этажей |
+| exact_floors | integer | Точное количество этажей |
 | address_contains | string | Поиск по частичному совпадению адреса |
 
 Информация возвращается в виде списка Campus:
@@ -155,22 +157,7 @@
 
 ### ER-диаграмма
 
-```mermaid
-erDiagram
-    CAMPUS ||--o{ CAMPUS_AMENITY : has
-    AMENITY ||--o{ CAMPUS_AMENITY : used_in
-    CAMPUS {
-        int id PK
-        string name
-        string address
-        int floors
-        boolean is_active
-    }
-    AMENITY {
-        int id PK
-        string title
-    }
-    CAMPUS_AMENITY {
-        int campus_id FK
-        int amenity_id FK
-    }
+```markdown
+### ER-диаграмма
+
+[ER-диаграмма](erd.png)

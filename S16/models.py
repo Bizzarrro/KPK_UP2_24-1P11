@@ -9,16 +9,37 @@ class BaseModel(Model):
 class Campus(BaseModel):
     id = PrimaryKeyField()
     name = CharField(max_length=50, unique=True, null=False)
-    address = CharField(null=False)
+    address = TextField(null=False)
     floors = IntegerField(null=False)
     is_active = BooleanField(default=True, null=False)
 
     class Meta:
         table_name = 'campus'
 
+    @staticmethod
+    def get_campuses_list(min_floors=None, max_floors=None, exact_floors=None, address_contains=None):
+        """
+        Получить список корпусов по заданным параметрам
+        """
+        query = Campus.select().where(Campus.is_active == True)
+        
+        if min_floors is not None:
+            query = query.where(Campus.floors >= min_floors)
+        
+        if max_floors is not None:
+            query = query.where(Campus.floors <= max_floors)
+        
+        if exact_floors is not None:
+            query = query.where(Campus.floors == exact_floors)
+        
+        if address_contains is not None:
+            query = query.where(Campus.address.contains(address_contains))
+        
+        return query
+
 class Amenity(BaseModel):
     id = PrimaryKeyField()
-    title = CharField(unique=True, null=False)
+    title = CharField(max_length=100, unique=True, null=False)
 
     class Meta:
         table_name = 'amenity'
