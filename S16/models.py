@@ -1,4 +1,5 @@
 from peewee import *
+from peewee import Check
 
 db = SqliteDatabase('campus.db')
 
@@ -9,7 +10,7 @@ class BaseModel(Model):
 class Campus(BaseModel):
     id = PrimaryKeyField()
     name = CharField(max_length=50, unique=True, null=False)
-    address = CharField(max_length=200, null=False)  # Вернул CharField, как просил препод
+    floors = IntegerField(null=False, constraints=[Check('floors > 0')])
     floors = IntegerField(null=False)
     is_active = BooleanField(default=True, null=False)
 
